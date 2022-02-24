@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+docs
+coverage
+
+tests/global-setup.js
+tests/global-teardown.js
+jest.config.js
