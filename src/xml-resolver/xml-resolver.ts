@@ -8,6 +8,7 @@ import {
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { CerRetriever } from '../certificado/cer-retriever';
+import { CfdiDefaultLocations } from '../cadena-origen/cfdi-default-locations';
 
 /**
  * XmlResolver - Class to download xml resources from internet to local paths
@@ -152,7 +153,7 @@ export class XmlResolver {
         return new CerRetriever(this.getLocalPath(), this.getDownloader());
     }
 
-    public resolveCadenaOrigenLocation(version: string): void {
-        // TODO
+    public resolveCadenaOrigenLocation(version: string): Promise<string> {
+        return this.resolve(CfdiDefaultLocations.location(version), XmlResolver.TYPE_XSLT);
     }
 }
