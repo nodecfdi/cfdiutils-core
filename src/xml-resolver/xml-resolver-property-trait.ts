@@ -2,7 +2,7 @@ import { XmlResolverPropertyInterface } from './xml-resolver-property-interface'
 import { XmlResolver } from './xml-resolver';
 
 export abstract class XmlResolverPropertyTrait implements XmlResolverPropertyInterface {
-    private _xmlResolver!: XmlResolver | null;
+    private _xmlResolver: XmlResolver | null = null;
 
     public getXmlResolver(): XmlResolver {
         if (!(this._xmlResolver instanceof XmlResolver)) {
