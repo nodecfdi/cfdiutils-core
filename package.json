@@ -52,6 +52,7 @@
     },
     "dependencies": {
         "@nodecfdi/credentials": "^1.2.0",
-        "@nodecfdi/xml-resource-retriever": "^1.0.0"
+        "@nodecfdi/xml-resource-retriever": "^1.0.0",
+        "typescript-mix": "^3.1.3"
     }
 }
