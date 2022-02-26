@@ -23,7 +23,7 @@ jobs:
                 uses: actions/checkout@v2
 
             -   name: Install libsaxonb-java on linux
-                if: matrix.operating-systems == 'ubuntu-latest'
+                if: matrix.os == 'ubuntu-latest'
                 run: sudo apt-get install -y -qq libsaxonb-java
 
             -   name: Use Node ${{ matrix.node }}
@@ -62,7 +62,7 @@ jobs:
                     fetch-depth: 0
 
             -   name: Install libsaxonb-java on linux
-                if: matrix.operating-systems == 'ubuntu-latest'
+                if: matrix.os == 'ubuntu-latest'
                 run: sudo apt-get install -y -qq libsaxonb-java
 
             -   name: Use Node ${{ matrix.node }}
