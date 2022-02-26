@@ -11,9 +11,19 @@ export default [
     {
         input: 'src/index.ts',
         output: [
-            {file: pkg.main, format: 'cjs'},
-            {file: pkg.module, format: 'es'},
+            { file: pkg.main, format: 'cjs' },
+            { file: pkg.module, format: 'es' },
         ],
-        plugins: [typescript({tsconfig: './tsconfig.json'})],
+        plugins: [typescript({ tsconfig: './tsconfig.json' })],
+        external: [
+            '@nodecfdi/xml-resource-retriever',
+            'path',
+            'fs',
+            '@nodecfdi/cfdiutils-common',
+            'typescript-mix',
+            '@nodecfdi/credentials',
+            'temp',
+            'child_process',
+        ],
     },
 ];
