@@ -1,5 +1,5 @@
 # @nodecfdi/cfdiutils-core ChangeLog
 
-## 1.0.0
+## 0.5.0
 
 - First release
