@@ -1,13 +1,11 @@
 name: CI
 on:
     push:
-        branches:
-            - main
+        branches: [ main ]
     pull_request:
-        branches:
-            - main
+        branches: [ main ]
     schedule:
-        - cron: '0 16 * * 0' # sunday 16:00
+        -   cron: '0 16 * * 0' # sunday 16:00
 jobs:
     main:
         name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
@@ -39,7 +37,7 @@ jobs:
                 run: yarn lint
 
             -   name: Test
-                run: yarn test --ci --coverage --maxWorkers=2
+                run: yarn test --ci --coverage --maxWorkers=1
 
             -   name: Build
                 run: yarn build
