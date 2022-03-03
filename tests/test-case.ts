@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { XmlResolver } from '../src/xml-resolver/xml-resolver';
+import { XmlResolver } from '../src';
 
 const useTestCase = (): {
     utilAsset(file: string): string;

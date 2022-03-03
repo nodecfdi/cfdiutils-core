@@ -11,10 +11,10 @@ export class CerRetriever extends AbstractBaseRetriever implements RetrieverInte
         return new Promise<void>((resolve, reject) => {
             try {
                 Certificate.openFile(localPath);
-                resolve();
+                return resolve();
             } catch (e) {
                 unlink(localPath, () => {
-                    reject(new Error(`The source ${source} is not a cer file`));
+                    return reject(new Error(`The source ${source} is not a cer file`));
                 });
             }
         });

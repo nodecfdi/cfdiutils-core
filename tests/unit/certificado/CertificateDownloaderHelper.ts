@@ -34,7 +34,7 @@ export class CertificateDownloaderHelper implements DownloaderInterface {
                 }
                 attempt++;
             }
-        } while (success !== true && error == null && attempt < this._maxAttempts);
+        } while (!success && error == null && attempt < this._maxAttempts);
         if (success) {
             return Promise.resolve();
         }

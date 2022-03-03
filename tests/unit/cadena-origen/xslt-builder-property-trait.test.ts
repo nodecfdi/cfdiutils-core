@@ -1,5 +1,5 @@
 import { XsltBuilderPropertySpecimen } from './xslt-builder-property-specimen';
-import { SaxonbCliBuilder } from '../../../src/cadena-origen/saxonb-cli-builder';
+import { SaxonbCliBuilder } from '../../../src';
 
 describe('XsltBuilderPropertyTrait', () => {
     test('xslt builder property without set', () => {
