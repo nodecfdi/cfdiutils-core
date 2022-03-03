@@ -1,5 +1,4 @@
-import { TfdCadenaDeOrigen } from '../../../src/timbre-fiscal-digital/tfd-cadena-de-origen';
-import { XmlResolver } from '../../../src/xml-resolver/xml-resolver';
+import { TfdCadenaDeOrigen, XmlResolver } from '../../../src';
 import { useTestCase } from '../../test-case';
 import { XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
 import { readFileSync } from 'fs';

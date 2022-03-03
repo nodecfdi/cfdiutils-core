@@ -1,4 +1,4 @@
-import { NodeCertificado } from '../../../src/certificado/node-certificado';
+import { NodeCertificado } from '../../../src';
 import { XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
 import { cleanupSync, openSync } from 'temp';
 import { readFileSync } from 'fs';

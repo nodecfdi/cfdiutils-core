@@ -32,6 +32,10 @@
                 "allowTemplateLiterals": true
             }
         ],
+        "quote-props": [
+            "error",
+            "consistent"
+        ],
         "@typescript-eslint/no-floating-promises": [
             "error"
         ],

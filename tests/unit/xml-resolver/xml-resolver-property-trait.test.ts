@@ -1,6 +1,5 @@
-import { XmlResolverPropertyInterface } from '../../../src/xml-resolver/xml-resolver-property-interface';
+import { XmlResolverPropertyInterface, XmlResolver } from '../../../src';
 import { XmlResolverPropertySpecimen } from './xml-resolver-property-specimen';
-import { XmlResolver } from '../../../src/xml-resolver/xml-resolver';
 
 describe('XmlResolverPropertyTrait', () => {
     let specimen: XmlResolverPropertyInterface;

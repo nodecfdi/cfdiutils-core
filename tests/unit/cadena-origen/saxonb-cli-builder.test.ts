@@ -1,8 +1,6 @@
-import { SaxonbCliBuilder } from '../../../src/cadena-origen/saxonb-cli-builder';
+import { SaxonbCliBuilder, XsltBuildException, CfdiDefaultLocations } from '../../../src';
 import { accessSync, constants, readFileSync } from 'fs';
-import { XsltBuildException } from '../../../src/cadena-origen/xslt-build-exception';
 import { useTestCase } from '../../test-case';
-import { CfdiDefaultLocations } from '../../../src/cadena-origen/cfdi-default-locations';
 
 describe('SaxonbCliBuilder', () => {
     const { testIf, downloadResourceIfNotExists, utilAsset } = useTestCase();

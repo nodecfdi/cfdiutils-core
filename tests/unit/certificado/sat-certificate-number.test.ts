@@ -1,4 +1,4 @@
-import { SatCertificateNumber } from '../../../src/certificado/sat-certificate-number';
+import { SatCertificateNumber } from '../../../src';
 
 describe('SatCertificateNumber', () => {
     test.each([['00000000000000000000'], ['98765432109876543210']])(

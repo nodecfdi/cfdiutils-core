@@ -96,7 +96,7 @@ export class XmlResolver {
         if (!existsSync(local)) {
             await retriever.retrieve(resource);
         }
-        return local;
+        return Promise.resolve(local);
     }
 
     public obtainTypeFromUrl(url: string): string {

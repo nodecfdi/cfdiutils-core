@@ -1,4 +1,4 @@
-import { SatCertificateNumber } from '../../../src/certificado/sat-certificate-number';
+import { SatCertificateNumber } from '../../../src';
 import { useTestCase } from '../../test-case';
 import { CertificateDownloaderHelper } from './CertificateDownloaderHelper';
 import { existsSync, unlinkSync } from 'fs';

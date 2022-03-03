@@ -1,4 +1,4 @@
-import { CfdiDefaultLocations } from '../../../src/cadena-origen/cfdi-default-locations';
+import { CfdiDefaultLocations } from '../../../src';
 
 describe('CfdiDefaultLocations', () => {
     test.each([

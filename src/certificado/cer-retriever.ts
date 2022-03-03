@@ -24,6 +24,6 @@ export class CerRetriever extends AbstractBaseRetriever implements RetrieverInte
         this.clearHistory();
         const localFileName = await this.download(url);
         this.addToHistory(url, localFileName);
-        return localFileName;
+        return Promise.resolve(localFileName);
     }
 }

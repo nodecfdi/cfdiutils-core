@@ -1,5 +1,5 @@
 import { use } from 'typescript-mix';
-import { XmlResolverPropertyTrait } from '../../../src/xml-resolver/xml-resolver-property-trait';
+import { XmlResolverPropertyTrait } from '../../../src';
 
 export interface XmlResolverPropertySpecimen extends XmlResolverPropertyTrait {}
 

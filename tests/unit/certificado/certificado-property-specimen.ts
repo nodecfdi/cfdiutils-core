@@ -1,5 +1,5 @@
 import { use } from 'typescript-mix';
-import { CertificadoPropertyTrait } from '../../../src/certificado/certificado-property-trait';
+import { CertificadoPropertyTrait } from '../../../src';
 
 export interface CertificadoPropertySpecimen extends CertificadoPropertyTrait {}
 

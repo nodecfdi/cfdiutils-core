@@ -1,6 +1,5 @@
-import { XsltBuilderPropertyInterface } from '../../../src/cadena-origen/xslt-builder-property-interface';
+import { XsltBuilderPropertyInterface, XsltBuilderPropertyTrait } from '../../../src';
 import { use } from 'typescript-mix';
-import { XsltBuilderPropertyTrait } from '../../../src/cadena-origen/xslt-builder-property-trait';
 
 export interface XsltBuilderPropertySpecimen extends XsltBuilderPropertyTrait {}
 

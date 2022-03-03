@@ -9,6 +9,6 @@ export class NodeContainer implements ContainerWithAttributeInterface {
     }
 
     public getAttributeValue(attribute: string): string {
-        return this._node.attributes().get(attribute) || '';
+        return this._node.get(attribute);
     }
 }

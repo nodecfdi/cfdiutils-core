@@ -1,5 +1,5 @@
 import { CNode, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
-import { TfdVersion } from '../../../src/timbre-fiscal-digital/tfd-version';
+import { TfdVersion } from '../../../src';
 
 describe('TfdVersion', () => {
     test.each([

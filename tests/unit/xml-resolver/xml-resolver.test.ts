@@ -1,4 +1,4 @@
-import { XmlResolver } from '../../../src/xml-resolver/xml-resolver';
+import { XmlResolver } from '../../../src';
 import { NodeDownloader } from '@nodecfdi/xml-resource-retriever';
 import { existsSync } from 'fs';
 
