@@ -55,7 +55,7 @@
     "dependencies": {
         "@nodecfdi/cfdiutils-common": "^1.0.1",
         "@nodecfdi/credentials": "^1.2.0",
-        "@nodecfdi/xml-resource-retriever": "^1.0.0",
+        "@nodecfdi/xml-resource-retriever": "^1.0.1",
         "temp": "^0.9.4",
         "typescript-mix": "^3.1.3"
     }
