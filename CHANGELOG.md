@@ -1,5 +1,10 @@
 # @nodecfdi/cfdiutils-core ChangeLog
 
+## 0.6.1
+- Update @nodecfdi/xml-resource-retriever
+- Update workflow to work with only worker (jest problem with downloads)
+- Move LICENSE to LICENSE.md (GitHub not found license problem)
+
 ## 0.6.0
 - Minor fixes for handle async functions
 - Update dependencies
