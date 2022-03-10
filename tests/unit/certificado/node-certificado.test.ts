@@ -39,8 +39,7 @@ describe('NodeCertificado', () => {
 
         expect.hasAssertions();
         try {
-            const l = nodeCertificado.extract();
-            console.log(l);
+            nodeCertificado.extract();
         } catch (e) {
             expect(e).toBeInstanceOf(Error);
             expect(e).toHaveProperty('message', 'The certificado attribute is not a valid base64 encoded string');
