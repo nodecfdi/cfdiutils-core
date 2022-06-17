@@ -22,3 +22,25 @@
 [discord]: https://discord.gg/aFGYXvX
 
 > Core of CfdiUtils
+
+:us: The documentation of this project is in spanish as this is the natural language for intented audience.
+
+:mexico: La documentación del proyecto está en español porque ese es el lenguaje principal de los usuarios.
+
+## Acerca de nodecfdi/cfdiutils-core
+
+Esta es una libreria que contiene muchas clases de ayuda, es la parte principal del set de librerias cfdiutils.
+
+Libreria inspirada por la versión para php https://github.com/eclipxe13/CfdiUtils
+
+## Instalación
+
+```shell
+npm i @nodecfdi/cfdiutils-core --save
+```
+
+o
+
+```shell
+yarn add @nodecfdi/cfdiutils-core
+```

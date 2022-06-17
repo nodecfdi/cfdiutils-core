@@ -1,5 +1,9 @@
 # @nodecfdi/cfdiutils-core ChangeLog
 
+## 0.6.3
+- Update dependencies
+- Update ci for use test:ci
+
 ## 0.6.2
 
 - Update dependencies
