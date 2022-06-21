@@ -83,7 +83,8 @@ describe('SaxonbCliBuilder', () => {
             const builder = new SaxonbCliBuilder(executable || '');
             const cadenaOrigen = await builder.build(readFileSync(xmlPath, 'binary'), xslPath);
             expect(cadenaOrigen).toBe(readFileSync(expectedTransformationPath, 'binary').trimEnd());
-        }
+        },
+        30000
     );
 
     testIf(isExecutable())('build with empty xml', async () => {
