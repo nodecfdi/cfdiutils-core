@@ -1,6 +1,6 @@
 {
     "name": "@nodecfdi/cfdiutils-core",
-    "version": "0.6.3",
+    "version": "0.6.4",
     "description": "Core of CfdiUtils",
     "main": "dist/cfdiutils-core.cjs.js",
     "module": "dist/cfdiutils-core.esm.js",

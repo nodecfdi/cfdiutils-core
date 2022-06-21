@@ -1,5 +1,9 @@
 # @nodecfdi/cfdiutils-core ChangeLog
 
+## 0.6.4
+- Change from spawn to exec (see open issue on node https://github.com/nodejs/node/issues/19218)
+- Fix problem with stdout being truncated
+
 ## 0.6.3
 - Update dependencies
 - Update ci for use test:ci
