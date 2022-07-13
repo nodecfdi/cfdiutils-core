@@ -63,7 +63,7 @@ export class NodeCertificado {
     /**
      * Extract and save the certificate into a specified location
      *
-     * @see extract
+     * @see {@link NodeCertificado.extract}
      *
      * @param filename -
      *
