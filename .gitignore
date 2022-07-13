@@ -5,7 +5,7 @@ dist/
 /.vscode/settings.json
 /scratch
 /reports
-tests/public/www.sat.gob.mx
+tests/_build
 scratch
 *.tsbuildinfo
 .pnpm-debug.log
