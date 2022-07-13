@@ -44,9 +44,12 @@ const useTestCase = (): {
         }
 
         try {
+            if (existsSync(installationPath)) {
+                return installationPath;
+            }
             cpSync(cerFile, installationPath);
         } catch (e) {
-            throw new Error(`Cannot install ${cerFile} into ${installationPath}`);
+            throw new Error(`Cannot install ${cerFile} into ${installationPath} error: ${(e as Error).message}`);
         }
 
         return installationPath;
