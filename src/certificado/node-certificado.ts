@@ -33,11 +33,11 @@ export class NodeCertificado {
             return '';
         }
 
-        let certificateBin: string;
+        let certificateBin = '';
         try {
             certificateBin = Buffer.from(certificateBase64, 'base64').toString('binary');
         } catch (e) {
-            certificateBin = '';
+            // ignore
         }
         if ('' === certificateBin) {
             throw new Error('The certificado attribute is not a valid base64 encoded string');

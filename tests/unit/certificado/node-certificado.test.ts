@@ -107,4 +107,12 @@ describe('NodeCertificado', () => {
         const certificate = nodeCertificado.obtain();
         expect(certificate.rfc()).toBe('CTO021007DZ8');
     });
+
+    test('obtain with cfdi4.0', () => {
+        const cfdiSample = utilAsset('cfdi40-real.xml');
+        const nodeCertificado = createNodeCertificado(readFileSync(cfdiSample, 'binary'));
+
+        const certificate = nodeCertificado.obtain();
+        expect(certificate.rfc()).toBe('CSM190311AH6');
+    });
 });

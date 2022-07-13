@@ -8,4 +8,11 @@ describe('CfdiDefaultLocations', () => {
     ])('location by version %s', (version, location) => {
         expect(CfdiDefaultLocations.location(version)).toBe(location);
     });
+
+    test('invalid version throw error', () => {
+        const t = (): string => CfdiDefaultLocations.location('1.0');
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('Cannot get the default xslt location for version 1.0');
+    });
 });

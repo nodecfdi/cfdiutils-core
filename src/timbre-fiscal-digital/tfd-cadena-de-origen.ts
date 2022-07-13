@@ -27,7 +27,7 @@ class TfdCadenaDeOrigen
         const resolver = this.getXmlResolver();
 
         // obtain version if it was not set
-        if ('' === version) {
+        if (version === '') {
             version = new TfdVersion().getFromXmlString(tfdXmlString);
         }
 

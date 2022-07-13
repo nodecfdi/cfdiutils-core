@@ -1,12 +1,13 @@
-import { NodeDownloader } from '@nodecfdi/xml-resource-retriever';
+import { NodeDownloader, DownloaderInterface, RetrieverInterface } from '@nodecfdi/xml-resource-retriever';
 import { install } from '@nodecfdi/cfdiutils-common';
 import { XMLSerializer, DOMImplementation, DOMParser } from '@xmldom/xmldom';
 import { existsSync } from 'fs';
+import { SatCertificateNumber } from '~/certificado/sat-certificate-number';
 import { XmlResolver } from '~/xml-resolver/xml-resolver';
 import { useTestCase } from '../../test-case';
 
 describe('XmlResolver', () => {
-    const { newResolver } = useTestCase();
+    const { newResolver, utilAsset, installCertificate } = useTestCase();
 
     beforeAll(() => {
         install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
@@ -79,6 +80,15 @@ describe('XmlResolver', () => {
         await expect(t).rejects.toThrow(`Unable to handle the resource (Type: ) http://example.org/example.xml`);
     });
 
+    test('get retrieve throws exception when localpath is empty', async () => {
+        const resolver = new XmlResolver('');
+
+        const t = (): RetrieverInterface | undefined => resolver.newRetriever(XmlResolver.TYPE_CER);
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('Cannot create a retriever if no local path was found');
+    });
+
     test.each([
         ['xsd', 'http://example.com/resource.xsd', XmlResolver.TYPE_XSD],
         ['xlst', 'http://example.com/resource.xslt', XmlResolver.TYPE_XSLT],
@@ -89,5 +99,26 @@ describe('XmlResolver', () => {
     ])('obtain type from url %s', (_name: string, url: string, expectedType: string) => {
         const resolver = new XmlResolver();
         expect(resolver.obtainTypeFromUrl(url)).toBe(expectedType);
+    });
+
+    test('resolve cer file with existent file', async () => {
+        const localPath = installCertificate(utilAsset('certs/20001000000300022779.cer'));
+
+        const certificateId = '20001000000300022779';
+        const cerNumber = new SatCertificateNumber(certificateId);
+        const resolver = newResolver();
+        const remoteUrl = cerNumber.remoteUrl();
+
+        const nullDownloader = new (class implements DownloaderInterface {
+            public downloadTo(source: string, destination: string): Promise<void> {
+                throw new Error(`${source} will not be downloaded to ${destination}`);
+            }
+        })();
+
+        resolver.setDownloader(nullDownloader);
+
+        const resolvedPath = await resolver.resolve(remoteUrl, XmlResolver.TYPE_CER);
+
+        expect(resolvedPath).toBe(localPath);
     });
 });

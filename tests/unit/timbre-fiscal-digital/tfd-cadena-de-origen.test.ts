@@ -25,7 +25,7 @@ describe('TfdCadenaDeOrigen', () => {
         expect(tfdCO.getXmlResolver()).toBe(resolver);
     });
 
-    test('obtain version 11 without version argument', async () => {
+    test('obtain version 11', async () => {
         const cfdi = XmlNodeUtils.nodeFromXmlString(readFileSync(utilAsset('cfdi33-valid.xml'), 'binary'));
         const tfd = cfdi.searchNode('cfdi:Complemento', 'tfd:TimbreFiscalDigital');
         if (!tfd) {
@@ -37,7 +37,7 @@ describe('TfdCadenaDeOrigen', () => {
         const tfdXml = XmlNodeUtils.nodeToXmlString(tfd);
 
         const tfdCO = new TfdCadenaDeOrigen(newResolver());
-        const cadenaOrigen = await tfdCO.build(tfdXml);
+        let cadenaOrigen = await tfdCO.build(tfdXml);
 
         const buildTfdString = [
             tfd.attributes().get('Version'),
@@ -50,6 +50,9 @@ describe('TfdCadenaDeOrigen', () => {
         ].join('|');
         const expected = `||${buildTfdString.replace('||', '|')}||`;
 
+        expect(cadenaOrigen).toBe(expected);
+
+        cadenaOrigen = await tfdCO.build(tfdXml, '1.1');
         expect(cadenaOrigen).toBe(expected);
     });
 
