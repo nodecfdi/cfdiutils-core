@@ -3,7 +3,7 @@ import {
     NodeDownloader,
     RetrieverInterface,
     XsdRetriever,
-    XsltRetriever,
+    XsltRetriever
 } from '@nodecfdi/xml-resource-retriever';
 import { join } from 'path';
 import { existsSync } from 'fs';
@@ -15,9 +15,13 @@ import { CfdiDefaultLocations } from '../cadena-origen/cfdi-default-locations';
  */
 export class XmlResolver {
     private _localPath = '';
+
     private _downloader!: DownloaderInterface;
+
     public static TYPE_XSD = 'XSD';
+
     public static TYPE_XSLT = 'XSLT';
+
     public static TYPE_CER = 'CER';
 
     constructor(localPath: string | null = null, downloader: DownloaderInterface | null = null) {
@@ -34,7 +38,7 @@ export class XmlResolver {
      * Set the localPath to the specified value.
      * If localPath is null then the value of defaultLocalPath is used.
      *
-     * @param localPath values: '' -> no resolve, null -> default path, anything else is the path
+     * @param localPath - values: '' -- no resolve, null -- default path, anything else is the path
      */
     public setLocalPath(localPath: string | null = null): void {
         if (localPath === null) {
@@ -62,7 +66,7 @@ export class XmlResolver {
      * Set the downloader object.
      * If send a null value the object return by defaultDownloader will be set.
      *
-     * @param downloader
+     * @param downloader - downloader implementation
      */
     public setDownloader(downloader: DownloaderInterface | null = null): void {
         if (!downloader) {
@@ -81,7 +85,7 @@ export class XmlResolver {
 
     public async resolve(resource: string, type = ''): Promise<string> {
         if (!this.hasLocalPath()) {
-            return Promise.resolve(resource);
+            return resource;
         }
         if ('' == type) {
             type = this.obtainTypeFromUrl(resource);
@@ -90,13 +94,14 @@ export class XmlResolver {
         }
         const retriever = this.newRetriever(type);
         if (!retriever) {
-            return Promise.reject(new Error(`Unable to handle the resource (Type: ${type}) ${resource}`));
+            throw new Error(`Unable to handle the resource (Type: ${type}) ${resource}`);
         }
         const local = retriever.buildPath(resource);
         if (!existsSync(local)) {
             await retriever.retrieve(resource);
         }
-        return Promise.resolve(local);
+
+        return local;
     }
 
     public obtainTypeFromUrl(url: string): string {
@@ -109,6 +114,7 @@ export class XmlResolver {
         if (this.isResourceExtension(url, 'cer')) {
             return XmlResolver.TYPE_CER;
         }
+
         return '';
     }
 
@@ -117,17 +123,18 @@ export class XmlResolver {
         if (extension.length > resource.length) {
             return false;
         }
+
         return resource.toLowerCase().endsWith(extension);
     }
 
     /**
      * Create a new Retriever depending on the type parameter, only allow TYPE_XSLT and TYPE_XSD
      *
-     * @param type
+     * @param type -
      */
     public newRetriever(type: string): RetrieverInterface | undefined {
         if (!this.hasLocalPath()) {
-            throw new ReferenceError('Cannot create a retriever if no local path was found');
+            throw new Error('Cannot create a retriever if no local path was found');
         }
         if (XmlResolver.TYPE_XSLT === type) {
             return this.newXsltRetriever();
@@ -138,6 +145,7 @@ export class XmlResolver {
         if (XmlResolver.TYPE_CER === type) {
             return this.newCerRetriever();
         }
+
         return undefined;
     }
 

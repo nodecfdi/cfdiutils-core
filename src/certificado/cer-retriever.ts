@@ -3,7 +3,7 @@ import { AbstractBaseRetriever, DownloaderInterface, RetrieverInterface } from '
 import { unlink } from 'fs';
 
 export class CerRetriever extends AbstractBaseRetriever implements RetrieverInterface {
-    constructor(basePath: string, downloader: DownloaderInterface | null = null) {
+    constructor(basePath: string, downloader?: DownloaderInterface) {
         super(basePath, downloader);
     }
 
@@ -11,6 +11,7 @@ export class CerRetriever extends AbstractBaseRetriever implements RetrieverInte
         return new Promise<void>((resolve, reject) => {
             try {
                 Certificate.openFile(localPath);
+
                 return resolve();
             } catch (e) {
                 unlink(localPath, () => {
@@ -24,6 +25,7 @@ export class CerRetriever extends AbstractBaseRetriever implements RetrieverInte
         this.clearHistory();
         const localFileName = await this.download(url);
         this.addToHistory(url, localFileName);
-        return Promise.resolve(localFileName);
+
+        return localFileName;
     }
 }

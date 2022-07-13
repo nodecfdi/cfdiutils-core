@@ -5,11 +5,12 @@ export abstract class AbstractXsltBuilder implements XsltBuilderInterface {
 
     protected assertBuildArgument(xmlContent: string, xsltLocation: string): string {
         if ('' === xmlContent) {
-            throw new SyntaxError('The XML content to transform is empty');
+            throw new Error('The XML content to transform is empty');
         }
         if ('' === xsltLocation) {
-            throw new SyntaxError('Xslt location was not set');
+            throw new Error('Xslt location was not set');
         }
+
         return '';
     }
 }

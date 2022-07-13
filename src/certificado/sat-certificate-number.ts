@@ -3,7 +3,7 @@ export class SatCertificateNumber {
 
     constructor(id: string) {
         if (!SatCertificateNumber.isValidCertificateNumber(id)) {
-            throw new SyntaxError('The certificate number is not correct');
+            throw new Error('The certificate number is not correct');
         }
         this._id = id;
     }
@@ -21,11 +21,11 @@ export class SatCertificateNumber {
             `/${this._id.substring(14, 16)}`,
             `/${this._id.substring(16, 18)}`,
             `/${this._id}`,
-            '.cer',
+            '.cer'
         ].join('');
     }
 
     public static isValidCertificateNumber(id: string): boolean {
-        return /^[0-9]{20}$/.test(id);
+        return /^\d{20}$/.test(id);
     }
 }

@@ -1,5 +1,5 @@
-import { CertificadoPropertyInterface } from './certificado-property-interface';
 import { Certificate } from '@nodecfdi/credentials';
+import { CertificadoPropertyInterface } from './certificado-property-interface';
 
 export abstract class CertificadoPropertyTrait implements CertificadoPropertyInterface {
     private _certificado: Certificate | null = null;
@@ -10,8 +10,9 @@ export abstract class CertificadoPropertyTrait implements CertificadoPropertyInt
 
     public getCertificado(): Certificate {
         if (!(this._certificado instanceof Certificate)) {
-            throw new ReferenceError('There is no current certificado');
+            throw new Error('There is no current certificado');
         }
+
         return this._certificado;
     }
 

@@ -8,6 +8,7 @@ export abstract class XsltBuilderPropertyTrait implements XsltBuilderPropertyInt
         if (!this._xsltBuilder) {
             throw new Error('There is no current xsltBuilder');
         }
+
         return this._xsltBuilder;
     }
 

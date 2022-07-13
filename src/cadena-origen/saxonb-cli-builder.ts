@@ -1,8 +1,9 @@
-import { AbstractXsltBuilder } from './abstract-xslt-builder';
 import { accessSync, constants, existsSync, statSync, write } from 'fs';
-import { XsltBuildException } from './xslt-build-exception';
 import { cleanupSync, open } from 'temp';
 import { exec } from 'child_process';
+
+import { AbstractXsltBuilder } from './abstract-xslt-builder';
+import { XsltBuildException } from './xslt-build-exception';
 
 export class SaxonbCliBuilder extends AbstractXsltBuilder {
     private _executablePath!: string;
@@ -23,9 +24,7 @@ export class SaxonbCliBuilder extends AbstractXsltBuilder {
         return this._executablePath;
     }
 
-    public build(xmlContent: string, xsltLocation: string): Promise<string> {
-        this.assertBuildArgument(xmlContent, xsltLocation);
-
+    private retrieveValidExecutable(): string {
         const executable = this.getExecutablePath();
         if (!existsSync(executable)) {
             throw new XsltBuildException('The executable path for SaxonB does not exists');
@@ -38,6 +37,20 @@ export class SaxonbCliBuilder extends AbstractXsltBuilder {
         } catch (e) {
             throw new XsltBuildException('The executable path for SaxonB is not executable');
         }
+
+        return executable;
+    }
+
+    private isValidXslt(xsltLocation: string): void {
+        if (!existsSync(xsltLocation)) {
+            throw new XsltBuildException('Xslt location was not found');
+        }
+    }
+
+    public build(xmlContent: string, xsltLocation: string): Promise<string> {
+        this.assertBuildArgument(xmlContent, xsltLocation);
+        const executable = this.retrieveValidExecutable();
+        this.isValidXslt(xsltLocation);
 
         return new Promise<string>((resolve, reject) => {
             open({ suffix: 'xml' }, (err, info) => {
@@ -56,18 +69,19 @@ export class SaxonbCliBuilder extends AbstractXsltBuilder {
                     exec(
                         finalCommand,
                         {
-                            maxBuffer: 1024 * 1024 * 100, // 100MB
+                            maxBuffer: 1024 * 1024 * 100 // 100MB
                         },
-                        (error, stdout, stderr) => {
+                        (errorCmd, stdout, stderr) => {
                             cleanupSync();
-                            if (error) {
+                            if (errorCmd) {
                                 return reject(new XsltBuildException(`Transformation error: ${stderr}`));
                             }
 
-                            if ('<?xml version="1.0" encoding="UTF-8"?>' === `${stdout}`.trim()) {
+                            if ('<?xml version="1.0" encoding="UTF-8"?>' === stdout.trim()) {
                                 return reject(new XsltBuildException('Transformation error'));
                             }
-                            return resolve(`${stdout}`.trim());
+
+                            return resolve(stdout.trim());
                         }
                     );
                 });

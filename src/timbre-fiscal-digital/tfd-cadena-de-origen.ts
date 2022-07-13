@@ -1,22 +1,23 @@
+import { Mixin } from 'ts-mixer';
+import { TfdVersion } from './tfd-version';
 import { XmlResolverPropertyInterface } from '../xml-resolver/xml-resolver-property-interface';
 import { XsltBuilderPropertyInterface } from '../cadena-origen/xslt-builder-property-interface';
-import { use } from 'typescript-mix';
 import { XmlResolverPropertyTrait } from '../xml-resolver/xml-resolver-property-trait';
 import { XsltBuilderPropertyTrait } from '../cadena-origen/xslt-builder-property-trait';
 import { XmlResolver } from '../xml-resolver/xml-resolver';
 import { XsltBuilderInterface } from '../cadena-origen/xslt-builder-interface';
 import { SaxonbCliBuilder } from '../cadena-origen/saxonb-cli-builder';
-import { TfdVersion } from './tfd-version';
 
-interface TfdCadenaDeOrigen extends XmlResolverPropertyTrait, XsltBuilderPropertyTrait {}
-
-class TfdCadenaDeOrigen implements XmlResolverPropertyInterface, XsltBuilderPropertyInterface {
-    @use(XmlResolverPropertyTrait, XsltBuilderPropertyTrait) private this: unknown;
-
+class TfdCadenaDeOrigen
+    extends Mixin(XmlResolverPropertyTrait, XsltBuilderPropertyTrait)
+    implements XmlResolverPropertyInterface, XsltBuilderPropertyInterface
+{
     public static TFD_10 = 'http://www.sat.gob.mx/sitio_internet/timbrefiscaldigital/cadenaoriginal_TFD_1_0.xslt';
+
     public static TFD_11 = 'http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/cadenaoriginal_TFD_1_1.xslt';
 
     constructor(xmlResolver: XmlResolver | null = null, xsltBuilder: XsltBuilderInterface | null = null) {
+        super();
         this.setXmlResolver(xmlResolver || new XmlResolver());
         this.setXsltBuilder(xsltBuilder || new SaxonbCliBuilder('/usr/bin/saxonb-xslt'));
     }
