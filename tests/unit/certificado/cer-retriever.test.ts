@@ -1,8 +1,8 @@
-import { SatCertificateNumber } from '../../../src';
-import { useTestCase } from '../../test-case';
-import { CertificateDownloaderHelper } from './CertificateDownloaderHelper';
 import { existsSync, unlinkSync } from 'fs';
 import { Certificate } from '@nodecfdi/credentials';
+import { SatCertificateNumber } from '~/certificado/sat-certificate-number';
+import { CertificateDownloaderHelper } from './CertificateDownloaderHelper';
+import { useTestCase } from '../../test-case';
 
 describe('CerRetriever', () => {
     const { newResolver } = useTestCase();
@@ -14,13 +14,10 @@ describe('CerRetriever', () => {
         const retriever = newResolver().newCerRetriever();
         const remoteUrl = cerNumber.remoteUrl();
 
-        expect.hasAssertions();
-        try {
-            await retriever.retrieve(remoteUrl);
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect((e as Error).message).toContain(remoteUrl);
-        }
+        const t = async (): Promise<string> => retriever.retrieve(remoteUrl);
+
+        await expect(t).rejects.toBeInstanceOf(Error);
+        await expect(t).rejects.toThrow(remoteUrl);
     });
 
     test('retrieve valid certificate', async () => {

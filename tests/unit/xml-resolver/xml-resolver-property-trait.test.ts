@@ -1,4 +1,5 @@
-import { XmlResolverPropertyInterface, XmlResolver } from '../../../src';
+import { XmlResolverPropertyInterface } from '~/xml-resolver/xml-resolver-property-interface';
+import { XmlResolver } from '~/xml-resolver/xml-resolver';
 import { XmlResolverPropertySpecimen } from './xml-resolver-property-specimen';
 
 describe('XmlResolverPropertyTrait', () => {
@@ -13,13 +14,10 @@ describe('XmlResolverPropertyTrait', () => {
     });
 
     test('getter fails on initial state', () => {
-        expect.hasAssertions();
-        try {
-            specimen.getXmlResolver();
-        } catch (e) {
-            expect(e).toBeInstanceOf(ReferenceError);
-            expect(e).toHaveProperty('message', 'There is not current xmlResolver');
-        }
+        const t = (): XmlResolver => specimen.getXmlResolver();
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('There is not current xmlResolver');
     });
 
     test('setter to value and to null', () => {
@@ -37,13 +35,9 @@ describe('XmlResolverPropertyTrait', () => {
         expect(specimen.hasXmlResolver()).toBeTruthy();
 
         specimen.setXmlResolver(null);
+        const t = (): XmlResolver => specimen.getXmlResolver();
 
-        expect.hasAssertions();
-        try {
-            specimen.getXmlResolver();
-        } catch (e) {
-            expect(e).toBeInstanceOf(ReferenceError);
-            expect(e).toHaveProperty('message', 'There is not current xmlResolver');
-        }
+        expect(t).toThrow(Error);
+        expect(t).toThrow('There is not current xmlResolver');
     });
 });

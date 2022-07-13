@@ -1,8 +1,4 @@
-import { use } from 'typescript-mix';
-import { XmlResolverPropertyTrait } from '../../../src';
+import { Mixin } from 'ts-mixer';
+import { XmlResolverPropertyTrait } from '~/xml-resolver/xml-resolver-property-trait';
 
-export interface XmlResolverPropertySpecimen extends XmlResolverPropertyTrait {}
-
-export class XmlResolverPropertySpecimen {
-    @use(XmlResolverPropertyTrait) private this: unknown;
-}
+export class XmlResolverPropertySpecimen extends Mixin(XmlResolverPropertyTrait) {}

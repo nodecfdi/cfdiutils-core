@@ -1,18 +1,16 @@
+import { XsltBuilderInterface } from '~/cadena-origen/xslt-builder-interface';
+import { SaxonbCliBuilder } from '~/cadena-origen/saxonb-cli-builder';
 import { XsltBuilderPropertySpecimen } from './xslt-builder-property-specimen';
-import { SaxonbCliBuilder } from '../../../src';
 
 describe('XsltBuilderPropertyTrait', () => {
-    test('xslt builder property without set', () => {
+    test('xslt builder property without set', async () => {
         const implementation = new XsltBuilderPropertySpecimen();
         expect(implementation.hasXsltBuilder()).toBeFalsy();
 
-        expect.hasAssertions();
-        try {
-            implementation.getXsltBuilder();
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect(e).toHaveProperty('message', 'There is no current xsltBuilder');
-        }
+        const t = async (): Promise<XsltBuilderInterface> => implementation.getXsltBuilder();
+
+        await expect(t).rejects.toBeInstanceOf(Error);
+        await expect(t).rejects.toThrow('There is no current xsltBuilder');
     });
 
     test('xslt builder property', () => {

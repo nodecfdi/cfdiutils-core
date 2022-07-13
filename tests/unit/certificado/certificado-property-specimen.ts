@@ -1,8 +1,4 @@
-import { use } from 'typescript-mix';
-import { CertificadoPropertyTrait } from '../../../src';
+import { Mixin } from 'ts-mixer';
+import { CertificadoPropertyTrait } from '~/certificado/certificado-property-trait';
 
-export interface CertificadoPropertySpecimen extends CertificadoPropertyTrait {}
-
-export class CertificadoPropertySpecimen {
-    @use(CertificadoPropertyTrait) private this: unknown;
-}
+export class CertificadoPropertySpecimen extends Mixin(CertificadoPropertyTrait) {}
