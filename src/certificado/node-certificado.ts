@@ -10,11 +10,11 @@ export class NodeCertificado {
     }
 
     /**
-     * Extract the certificate from Comprobante->certificado
+     * Extract the certificate from Comprobante.certificado
      * If the node does not exist return an empty string
      * The returned string is no longer base64 encoded
      *
-     * @throws {Error} If the certificado attribute is not a valid base64 encoded string
+     * @throws Error If the certificado attribute is not a valid base64 encoded string
      */
     public extract(): string {
         const version = this.getVersion();
@@ -33,15 +33,16 @@ export class NodeCertificado {
             return '';
         }
 
-        let certificateBin: string;
+        let certificateBin = '';
         try {
             certificateBin = Buffer.from(certificateBase64, 'base64').toString('binary');
         } catch (e) {
-            certificateBin = '';
+            // ignore
         }
         if ('' === certificateBin) {
             throw new Error('The certificado attribute is not a valid base64 encoded string');
         }
+
         return certificateBin;
     }
 
@@ -55,23 +56,24 @@ export class NodeCertificado {
         if ('4.0' === this._comprobante.searchAttribute('Version')) {
             return '4.0';
         }
+
         return '';
     }
 
     /**
      * Extract and save the certificate into a specified location
      *
-     * @see extract
+     * @see {@link NodeCertificado.extract}
      *
-     * @param filename
+     * @param filename -
      *
-     * @throws {ReferenceError} If the filename to store the certificate is empty
-     * @throws {Error} If the certificado attribute is empty
-     * @throws {Error} If cannot write the contents of the certificate
+     * @throws Error If the filename to store the certificate is empty
+     * @throws Error If the certificado attribute is empty
+     * @throws Error If cannot write the contents of the certificate
      */
     public save(filename: string): void {
         if ('' === filename) {
-            throw new ReferenceError('The filename to store the certificate is empty');
+            throw new Error('The filename to store the certificate is empty');
         }
         const certificado = this.extract();
         if ('' === certificado) {
@@ -89,6 +91,7 @@ export class NodeCertificado {
         if ('' === certificado) {
             throw new Error('The certificado attribute is empty');
         }
+
         return new Certificate(certificado);
     }
 }

@@ -1,7 +1,8 @@
-import { NodeCertificado } from '../../../src';
-import { XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
+import { install, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
+import { XMLSerializer, DOMImplementation, DOMParser } from '@xmldom/xmldom';
 import { cleanupSync, openSync } from 'temp';
 import { readFileSync } from 'fs';
+import { NodeCertificado } from '~/certificado/node-certificado';
 import { useTestCase } from '../../test-case';
 
 describe('NodeCertificado', () => {
@@ -10,18 +11,19 @@ describe('NodeCertificado', () => {
         return new NodeCertificado(XmlNodeUtils.nodeFromXmlString(contents));
     };
 
+    beforeAll(() => {
+        install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
+    });
+
     test('extract with wrong version', () => {
         const nodeCertificado = createNodeCertificado(
             '<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="1.9.80"/>'
         );
 
-        expect.hasAssertions();
-        try {
-            nodeCertificado.extract();
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect(e).toHaveProperty('message', 'Unsupported or unknown version');
-        }
+        const t = (): string => nodeCertificado.extract();
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('Unsupported or unknown version');
     });
 
     test('extract with empty certificate', () => {
@@ -37,13 +39,10 @@ describe('NodeCertificado', () => {
             '<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Certificado="ñ"/>'
         );
 
-        expect.hasAssertions();
-        try {
-            nodeCertificado.extract();
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect(e).toHaveProperty('message', 'The certificado attribute is not a valid base64 encoded string');
-        }
+        const t = (): string => nodeCertificado.extract();
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('The certificado attribute is not a valid base64 encoded string');
     });
 
     test('extract', () => {
@@ -60,13 +59,10 @@ describe('NodeCertificado', () => {
             '<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Certificado="Zm9v"/>'
         );
 
-        expect.hasAssertions();
-        try {
-            nodeCertificado.save('');
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect(e).toHaveProperty('message', 'The filename to store the certificate is empty');
-        }
+        const t = (): void => nodeCertificado.save('');
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('The filename to store the certificate is empty');
     });
 
     test('save with empty certificado', () => {
@@ -74,13 +70,10 @@ describe('NodeCertificado', () => {
             '<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3"/>'
         );
 
-        expect.hasAssertions();
-        try {
-            nodeCertificado.save(__dirname);
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect(e).toHaveProperty('message', 'The certificado attribute is empty');
-        }
+        const t = (): void => nodeCertificado.save(__dirname);
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('The certificado attribute is empty');
     });
 
     test('save with not writable filename', () => {
@@ -88,13 +81,10 @@ describe('NodeCertificado', () => {
             '<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Certificado="Zm9v"/>'
         );
 
-        expect.hasAssertions();
-        try {
-            nodeCertificado.save(__dirname);
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect(e).toHaveProperty('message', `Unable to write the certificate contents into ${__dirname}`);
-        }
+        const t = (): void => nodeCertificado.save(__dirname);
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow(`Unable to write the certificate contents into ${__dirname}`);
     });
 
     test('save', () => {
@@ -116,5 +106,13 @@ describe('NodeCertificado', () => {
 
         const certificate = nodeCertificado.obtain();
         expect(certificate.rfc()).toBe('CTO021007DZ8');
+    });
+
+    test('obtain with cfdi4.0', () => {
+        const cfdiSample = utilAsset('cfdi40-real.xml');
+        const nodeCertificado = createNodeCertificado(readFileSync(cfdiSample, 'binary'));
+
+        const certificate = nodeCertificado.obtain();
+        expect(certificate.rfc()).toBe('CSM190311AH6');
     });
 });

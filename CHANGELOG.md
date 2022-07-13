@@ -1,10 +1,32 @@
 # @nodecfdi/cfdiutils-core ChangeLog
 
+## 0.7.0
+
+### DOM agnostic
+
+- Added support to DOM Agnostic
+- Update dependencies
+
+### CI
+
+- Update workflow for use pnpm and better test coverage
+- Added Sonarcloud for better continuos code quality
+
+### Build
+
+- Replace rollup bundle to microbundle for generation of library
+
+### Docs
+
+- Update readme with examples and usages
+
 ## 0.6.4
-- Change from spawn to exec (see open issue on node https://github.com/nodejs/node/issues/19218)
+
+- Change from spawn to exec (see open issue on node <https://github.com/nodejs/node/issues/19218>)
 - Fix problem with stdout being truncated
 
 ## 0.6.3
+
 - Update dependencies
 - Update ci for use test:ci
 

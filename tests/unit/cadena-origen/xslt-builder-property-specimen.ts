@@ -1,8 +1,7 @@
-import { XsltBuilderPropertyInterface, XsltBuilderPropertyTrait } from '../../../src';
-import { use } from 'typescript-mix';
+import { Mixin } from 'ts-mixer';
+import { XsltBuilderPropertyTrait } from '~/cadena-origen/xslt-builder-property-trait';
+import { XsltBuilderPropertyInterface } from '~/cadena-origen/xslt-builder-property-interface';
 
-export interface XsltBuilderPropertySpecimen extends XsltBuilderPropertyTrait {}
-
-export class XsltBuilderPropertySpecimen implements XsltBuilderPropertyInterface {
-    @use(XsltBuilderPropertyTrait) private this: unknown;
-}
+export class XsltBuilderPropertySpecimen
+    extends Mixin(XsltBuilderPropertyTrait)
+    implements XsltBuilderPropertyInterface {}

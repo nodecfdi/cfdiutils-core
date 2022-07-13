@@ -6,8 +6,9 @@ export abstract class XmlResolverPropertyTrait implements XmlResolverPropertyInt
 
     public getXmlResolver(): XmlResolver {
         if (!(this._xmlResolver instanceof XmlResolver)) {
-            throw new ReferenceError('There is not current xmlResolver');
+            throw new Error('There is not current xmlResolver');
         }
+
         return this._xmlResolver;
     }
 

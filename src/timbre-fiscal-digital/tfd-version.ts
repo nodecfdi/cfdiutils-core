@@ -8,7 +8,7 @@ export class TfdVersion extends VersionDiscoverer {
     public rules(): Record<string, string> {
         return {
             '1.1': 'Version',
-            '1.0': 'version',
+            '1.0': 'version'
         };
     }
 }

@@ -10,6 +10,7 @@ import { DownloaderInterface, NodeDownloader } from '@nodecfdi/xml-resource-retr
  */
 export class CertificateDownloaderHelper implements DownloaderInterface {
     private _realDownloader: NodeDownloader;
+
     private readonly _maxAttempts: number;
 
     constructor() {
@@ -36,8 +37,9 @@ export class CertificateDownloaderHelper implements DownloaderInterface {
             }
         } while (!success && error == null && attempt < this._maxAttempts);
         if (success) {
-            return Promise.resolve();
+            return;
         }
-        return Promise.reject(error);
+
+        throw error;
     }
 }

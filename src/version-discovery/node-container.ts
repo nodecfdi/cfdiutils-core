@@ -1,5 +1,5 @@
-import { ContainerWithAttributeInterface } from './container-with-attribute-interface';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { ContainerWithAttributeInterface } from './container-with-attribute-interface';
 
 export class NodeContainer implements ContainerWithAttributeInterface {
     private _node: CNodeInterface;

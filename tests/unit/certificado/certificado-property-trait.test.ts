@@ -17,12 +17,9 @@ describe('CertificadoPropertyTrait', () => {
         implementation.setCertificado();
         expect(implementation.hasCertificado()).toBeFalsy();
 
-        expect.hasAssertions();
-        try {
-            implementation.getCertificado();
-        } catch (e) {
-            expect(e).toBeInstanceOf(ReferenceError);
-            expect((e as Error).message).toContain('current certificado');
-        }
+        const t = (): Certificate => implementation.getCertificado();
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('current certificado');
     });
 });

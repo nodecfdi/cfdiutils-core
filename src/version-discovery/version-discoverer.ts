@@ -1,6 +1,6 @@
+import { CNodeInterface, Xml } from '@nodecfdi/cfdiutils-common';
 import { ContainerWithAttributeInterface } from './container-with-attribute-interface';
 import { DomElementContainer } from './dom-element-container';
-import { CNodeInterface, Xml } from '@nodecfdi/cfdiutils-common';
 import { NodeContainer } from './node-container';
 
 export abstract class VersionDiscoverer {
@@ -18,6 +18,7 @@ export abstract class VersionDiscoverer {
                 return versionNumber;
             }
         }
+
         return '';
     }
 
