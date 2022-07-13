@@ -1,4 +1,4 @@
-import { existsSync, lstatSync, cpSync, mkdirSync } from 'fs';
+import { existsSync, lstatSync, copyFileSync, mkdirSync } from 'fs';
 import { join, basename, dirname } from 'path';
 import { SatCertificateNumber } from '~/certificado/sat-certificate-number';
 import { XmlResolver } from '~/xml-resolver/xml-resolver';
@@ -44,10 +44,7 @@ const useTestCase = (): {
         }
 
         try {
-            if (existsSync(installationPath)) {
-                return installationPath;
-            }
-            cpSync(cerFile, installationPath);
+            copyFileSync(cerFile, installationPath);
         } catch (e) {
             throw new Error(`Cannot install ${cerFile} into ${installationPath} error: ${(e as Error).message}`);
         }
