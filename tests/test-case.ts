@@ -37,7 +37,7 @@ const useTestCase = (): {
 
         const installationDir = dirname(installationPath);
         if (!existsSync(installationDir)) {
-            mkdirSync(installationDir);
+            mkdirSync(installationDir, { recursive: true });
         }
         if (!lstatSync(installationDir).isDirectory()) {
             throw new Error(`Cannot create installation dir ${installationDir}`);
