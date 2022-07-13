@@ -1,6 +1,6 @@
 {
     "name": "@nodecfdi/cfdiutils-core",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "description": "Core of CfdiUtils",
     "keywords": [
         "cfdi",
@@ -92,5 +92,8 @@
         "@nodecfdi/xml-resource-retriever": "^1.1.0",
         "temp": "^0.9.4",
         "ts-mixer": "^6.0.1"
+    },
+    "engines": {
+        "node": ">= 14.0.0"
     }
 }

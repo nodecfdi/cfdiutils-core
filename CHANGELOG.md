@@ -1,5 +1,11 @@
 # @nodecfdi/cfdiutils-core ChangeLog
 
+## 0.7.1
+
+### Patch Changes
+
+- Added min required node version
+
 ## 0.7.0
 
 ### DOM agnostic
