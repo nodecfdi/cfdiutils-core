@@ -24,7 +24,7 @@ jobs:
           sudo apt-get install -y -qq libsaxonb-java
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '16'
 
@@ -88,7 +88,7 @@ jobs:
           key: ${{ runner.os }}-node16-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '16'
 
